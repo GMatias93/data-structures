@@ -13,19 +13,11 @@ var Stack = function(){
   };
 
   someInstance.pop = function(){
-<<<<<<< HEAD
-    if(index >0) {
-      var temp = storage[index -1];
-      delete storage[index-1];
-      index--;
-      return temp;
-=======
     if(index > 0) {
       var popped = storage[index-1];
       delete storage[index-1];
     index--;
     return popped;
->>>>>>> fde549735645325fbcbd04dabd71e0787749e2d5
     }
   };
 
