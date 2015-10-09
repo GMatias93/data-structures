@@ -22,7 +22,7 @@ var LinkedList = function(){
   };
 
   list.contains = function(target){
-    console.log(list);
+    // console.log(list);
     if(list.head.value === target || list.tail.value === target){
       return true;
     }
