@@ -22,12 +22,22 @@ this.children.push(Tree(value));
 };
 
 treeMethods.contains = function(target){
-// if(this.children)
+//
 for(var i = 0; i < this.children.length; i++) {
     if(this.children[i].value === target) {
       return true;
+    } else {
+      for(var j = 0;j < this.children[i].length;j++) {
+        for(var k=0;k<this.children[i][j].length;k++) {
+          if(this.children[i][j][k].value === target) {
+            return true;
+          }
+        }
+      }
     }
-  return false;
+    return this.contains(this.children[i].value);
+  }
+    return false;
 };
 
 
