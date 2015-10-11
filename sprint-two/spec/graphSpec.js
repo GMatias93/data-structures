@@ -26,7 +26,6 @@ describe('graph', function() {
     expect(graph.contains('puppies')).to.equal(true);
     graph.removeNode('puppies');
     expect(graph.contains('puppies')).to.equal(false);
-    // expect(graph.contains('puppies')).to.equal(true);
   });
 
   it('should create edges between two nodes', function() {
