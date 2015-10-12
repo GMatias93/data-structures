@@ -48,23 +48,55 @@ Graph.prototype.hasEdge = function(fromNode, toNode){
 };
 
 Graph.prototype.addEdge = function(fromNode, toNode){
-  for(var i = 0; i < this.nodeList.length; i++){
-    if(this.nodeList[i].name === fromNode){
-      this.nodeList[i].edges.push(toNode);
-    }
-  }
+  if(fromNode === toNode){
     for(var i = 0; i < this.nodeList.length; i++){
-    if(this.nodeList[i].name === toNode){
-      this.nodeList[i].edges.push(fromNode);
+      if(this.nodeList[i].name === fromNode){
+        this.nodeList[i].edges.push(toNode);
+      }
     }
+  } else {
+    for(var i = 0; i < this.nodeList.length; i++){
+      if(this.nodeList[i].name === fromNode){
+        this.nodeList[i].edges.push(toNode);
+      }
+    }
+    for(var i = 0; i < this.nodeList.length; i++){
+      if(this.nodeList[i].name === toNode){
+        this.nodeList[i].edges.push(fromNode);
+      }
+    }  
   }
 
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode){
+  for(var i = 0; i < this.nodeList.length; i++){
+    if(this.nodeList[i].name === fromNode){
+      for(var j = 0; this.nodeList[i].edges.length; j++){
+        if(this.nodeList[i].edges[j] === toNode){
+          this.nodeList[i].edges.splice(j, 1);
+        }
+      }
+    }
+  }
+  for(var i = 0; i < this.nodeList.length; i++){
+    if(this.nodeList[i].name === toNode){
+      for(var j = 0; this.nodeList[i].edges.length; j++){
+        if(this.nodeList[i].edges[j] === fromNode){
+          this.nodeList[i].edges.splice(j, 1);
+        }
+      }
+    }
+  }
+
 };
 
 Graph.prototype.forEachNode = function(cb){
+  for(var i = 0; i < this.nodeList.length; i++){
+    if(this.nodeList[i] !== undefined){
+      cb(this.nodeList[i].name);
+    }
+  }
 };
 
 /*
