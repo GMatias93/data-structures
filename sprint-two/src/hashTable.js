@@ -5,56 +5,70 @@ var HashTable = function(){
 
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  if(this._storage.get(i) === undefined){
-  	this._storage.set(i, []);
+  //retrieve the bucket at the provided index
+  var bucket = this._storage.get(i);
+  //if the bucket does not exist, create it
+  if(!bucket){
+  	bucket = [];
+    //set it to the provided index in the hash
+    this._storage.set(i, bucket);
   }
-  this._storage.get(i).push(k,v);
 
-  // this._storage.get(i) = [];
+  var found = false;
+  //iterate over the bucket
+  for(var i = 0; i < bucket.length; i++){
+    //set each index in bucket equal to tuple
+    var tuple = bucket[i];
+    //key exists?
+    if(tuple[0] === k){
+      //update it
+      tuple[1] = v;
+      found = true;
+      break;
+    }
+  }
 
-  // this._storage[i].set = ;
-  // console.log(this._storage[i]);
-  // console.log(i);
+  //if no key was found
+  if(!found){
+    //insert a new tuple
+    bucket.push([k, v]);  
+  } 
+
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  for(var j = 0; j < this._storage.get(i).length; j++){
-  	if(k === this._storage.get(i)[j]){
-  		console.log(this._storage.get(i));
-		return this._storage.get(i)[j + 1];
-  	}
+  //retrieve the bucket at i
+  var bucket = this._storage.get(i)
+  // iterate over the bucket
+  for(var i = 0; i < bucket.length; i++){
+    //set each iteration to tuple
+    var tuple = bucket[i];
+    // does key exist?
+    if(tuple[0] === k){
+      //return the value
+      return tuple[1]
+    }
   }
+  //return null if nothing was found
+  return null;
 };
+
 
 HashTable.prototype.remove = function(k){
 	var i = getIndexBelowMaxForKey(k, this._limit);
-		// console.log('this is J', j);
-		this._storage.each(function(val, index, list){
-			if(i === index){
-				for(var j = 0; j < val.length; j++){
-					if(val[j] === k){
-						val[j + 1] = null;
-					}
-				}
-			}
-		})
-
-// 	for(var j = 0; j < this._storage.get(i).length; j++){
-// 		console.log('this is I', i);
-// 		if(i === j){
-
-// 			for(var l = 0; l < this._storage.get(i)[j].length; l++){
-// 					if(this._storage.get(i)[l] === k){
-// 				this._storage.get(i)[l] = null;
-// 			}	
-// 		}
-// 	}
-// }
-// 	// 			this._storage.get(i)[l] = null;
-// 	// 		}
-// 	// 	}
-	// }
+		// retrieve the bucket at i
+    var bucket = this._storage.get(i)
+    //iterate over the bucket
+		for(var i = 0; i < bucket.length; i++){
+      //set each iteration to tuple
+      var tuple = bucket[i];
+        //does the key exist?
+        if(tuple[0] === k){
+          //delete the tuple
+          bucket[i] = [];
+        }
+    }
 };
 
 

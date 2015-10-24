@@ -1,3 +1,10 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  Functional Class:                                                                                                               //
+//                                                                                                              //
+//                                                                                                              //
+//                                                                                                              //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 var Queue = function(){
   var someInstance = {};
   var newQueue = 0;
@@ -8,7 +15,6 @@ var Queue = function(){
   var storage = {};
 
   // Implement the methods below
-
   someInstance.enqueue = function(value){
     storage[newQueue + delCounte] = value;
     newQueue++;
